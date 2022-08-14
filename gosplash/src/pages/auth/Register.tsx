@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const SampleHome:React.FC = () => {
+export const Register: React.FC = () => {
     return (
         <>
         <h1>Sample Home</h1>
