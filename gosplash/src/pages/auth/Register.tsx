@@ -4,17 +4,21 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { SubmitHandler, useForm } from "react-hook-form";
+
+interface FormInput {
+    name: string
+    email: string
+    password: string
+}
 
 export const Register: React.FC = () => {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-      };
-      
+    const {register, handleSubmit} = useForm<FormInput>()
+
+    const onSubmit: SubmitHandler<FormInput> = (data) => {
+        console.log(data)
+    }
+    
     return (
         <>
         <Container component="main" maxWidth="xs">
@@ -32,10 +36,10 @@ export const Register: React.FC = () => {
                 <Typography component="body" variant="body1">
                     アカウントを既に持っている方はログインから
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <Form name="name" label="お名前" />
-                    <Form name="mail" label="メールアドレス" />
-                    <Form name="password" label="パスワード" />
+                <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+                    <Form label="お名前" {...register('name')} />
+                    <Form label="メールアドレス" {...register('email')} />
+                    <Form label="パスワード" {...register('password')} />
                     <Form name="password_confirmation" label="確認用パスワード" />
                     <Button
                         type="submit"
