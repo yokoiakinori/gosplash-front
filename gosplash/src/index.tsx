@@ -9,10 +9,27 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    palette: {
+      primary: {main:string}
+      font: {main:string}
+    }
+  }
+
+  interface PaletteOptions {
+    font: {main:string}
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
       main: '#333',
+    },
+
+    font: {
+      main: '#611',
     }
   }
 })
