@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Register } from "./pages/auth/Register";
 import { Top } from "./pages/Top";
 import { NotFound } from "./pages/NotFound";
+import { SignIn } from "./pages/auth/SignIn";
 
 export const RouterConfig: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ export const RouterConfig: React.FC = () => {
 
             {/* 認証 */}
             <Route path="register" element={<Register />} />
+            <Route path="signin" element={<SignIn />} />
 
             {/* 例外ページ */}
             <Route path="*" element={<NotFound />} />

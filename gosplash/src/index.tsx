@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterConfig } from "./RouterConfig";
 import reportWebVitals from './reportWebVitals';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#333',
+    }
+  }
+})
 root.render(
   <React.StrictMode>
-    <RouterConfig />
+    <ThemeProvider theme={theme}>
+      <RouterConfig />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
