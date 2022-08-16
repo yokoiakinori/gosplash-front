@@ -33,7 +33,7 @@ export const Register: React.FC = () => {
                     アカウントを既に持っている方はログインから
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <Form name="name" label="ユーザー名" />
+                    <Form name="name" label="お名前" />
                     <Form name="mail" label="メールアドレス" />
                     <Form name="password" label="パスワード" />
                     <Form name="password_confirmation" label="確認用パスワード" />
