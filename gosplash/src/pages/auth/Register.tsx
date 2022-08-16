@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Form } from "../../components/Form";
+import Box from '@mui/material/Box';
 
 export const Register: React.FC = () => {
     return (
         <>
-        <h1>Sample Home</h1>
-        <nav>
-            <ul>
-                <li><Link to="page1">Sample Page1</Link></li>
-                <li><Link to="page2">Sample Page2</Link></li>
-            </ul>
-        </nav>
+        <h1>アカウント作成</h1>
+        <Box>
+            <Form name="name" label="ユーザー名" />
+            <Form name="mail" label="メールアドレス" />
+            <Form name="password" label="パスワード" />
+            <Form name="password_confirmation" label="確認用パスワード" />
+        </Box>
         </>
     )
 }

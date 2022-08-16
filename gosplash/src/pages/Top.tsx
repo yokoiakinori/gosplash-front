@@ -7,8 +7,7 @@ export const Top:React.FC = () => {
         <h1>Sample Home</h1>
         <nav>
             <ul>
-                <li><Link to="page1">Sample Page1</Link></li>
-                <li><Link to="page2">Sample Page2</Link></li>
+                <li><Link to="register">アカウント作成</Link></li>
             </ul>
         </nav>
         </>
