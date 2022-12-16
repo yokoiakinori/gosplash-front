@@ -1,5 +1,18 @@
 import React from "react";
-import { Box, Container, Button, Typography, TextField } from '@mui/material';
+import {
+    Box,
+    Container,
+    Button,
+    Typography,
+    TextField,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    InputAdornment,
+    IconButton,
+    FormHelperText
+} from '@mui/material';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup";
@@ -8,6 +21,7 @@ interface FormInput {
     name: string
     email: string
     password: string
+    password_confirmation: string
 }
 
 const schema = yup.object({
@@ -26,9 +40,19 @@ const schema = yup.object({
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].*$/,
         '推測されやすいパスワードが使用されています。'
     ),
+    password_confirmation: yup
+        .string()
+        .required('確認用パスワードは必ず入力してください。'),
 })
 
 export const Register: React.FC = () => {
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show)
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+    }
+
     const {
         register, 
         handleSubmit,
@@ -81,16 +105,43 @@ export const Register: React.FC = () => {
                         {...register('email')} 
                         helperText={errors.email?.message} 
                     />
+                    <FormControl
+                        variant={"outlined"}
+                        fullWidth
+                        error={"password" in errors}
+                        margin="normal"
+                        {...register('password')}
+                    >
+                        <InputLabel>パスワード</InputLabel>
+                        <OutlinedInput
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="パスワードの表示非表示を切り替えます"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            label="パスワード"
+                        />
+                        <FormHelperText>{errors.password?.message}</FormHelperText>
+                    </FormControl>
                     <TextField
-                        id="email"
+                        id="password_confirmation"
                         required
                         variant="outlined"
-                        label="パスワード"
+                        label="確認用パスワード"
                         fullWidth
                         margin="normal"
-                        error={"password" in errors} 
-                        {...register('password')} 
-                        helperText={errors.password?.message} 
+                        error={"password_confirmation" in errors}
+                        {...register('password_confirmation')}
+                        helperText={errors.password_confirmation?.message}
                     />
                     <Button
                         type="submit"
