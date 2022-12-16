@@ -47,9 +47,14 @@ const schema = yup.object({
 
 export const Register: React.FC = () => {
     const [showPassword, setShowPassword] = React.useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
+    const handleClickShowPasswordConfirmation = () => setShowPasswordConfirmation((show) => !show)
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+    }
+    const handleMouseDownPasswordConfirmation = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
     }
 
@@ -132,17 +137,33 @@ export const Register: React.FC = () => {
                         />
                         <FormHelperText>{errors.password?.message}</FormHelperText>
                     </FormControl>
-                    <TextField
-                        id="password_confirmation"
-                        required
-                        variant="outlined"
-                        label="確認用パスワード"
+                    <FormControl
+                        variant={"outlined"}
                         fullWidth
-                        margin="normal"
                         error={"password_confirmation" in errors}
+                        margin="normal"
                         {...register('password_confirmation')}
-                        helperText={errors.password_confirmation?.message}
-                    />
+                    >
+                        <InputLabel>確認パスワード</InputLabel>
+                        <OutlinedInput
+                            id="password_confirmation"
+                            type={showPasswordConfirmation ? 'text' : 'password'}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="確認パスワードの表示非表示を切り替えます"
+                                        onClick={handleClickShowPasswordConfirmation}
+                                        onMouseDown={handleMouseDownPasswordConfirmation}
+                                        edge="end"
+                                    >
+                                        {showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="確認パスワード"
+                        />
+                        <FormHelperText>{errors.password_confirmation?.message}</FormHelperText>
+                    </FormControl>
                     <Button
                         type="submit"
                         onClick={handleSubmit(onSubmit)}
