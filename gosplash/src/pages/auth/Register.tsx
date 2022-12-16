@@ -1,10 +1,9 @@
 import React from "react";
 import { Form } from "../../components/Form";
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Box, Container, Button, Typography, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from "yup";
 
 interface FormInput {
     name: string
@@ -12,8 +11,32 @@ interface FormInput {
     password: string
 }
 
+const schema = yup.object({
+    name: yup
+    .string()
+    .required('名前は必ず入力してください。'),
+    email: yup
+    .string()
+    .required('メールアドレスは必ず入力してください。')
+    .email('正しいメールアドレスを入力してください。'),
+    password: yup
+    .string()
+    .required('パスワードは必ず入力してください。')
+    .min(6, 'パスワードが短すぎます。')
+    .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].*$/,
+        '推測されやすいパスワードが使用されています。'
+    ),
+})
+
 export const Register: React.FC = () => {
-    const {register, handleSubmit} = useForm<FormInput>()
+    const {
+        register, 
+        handleSubmit,
+        formState: {errors},
+    } = useForm<FormInput>({
+        resolver: yupResolver(schema),
+    })
 
     const onSubmit: SubmitHandler<FormInput> = (data) => {
         console.log(data)
@@ -33,16 +56,43 @@ export const Register: React.FC = () => {
                 <Typography component="h1" variant="h5">
                     アカウント作成
                 </Typography>
-                <Typography component="body" variant="body1">
+                <Typography component="p" variant="body1">
                     アカウントを既に持っている方はログインから
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
-                    <Form label="お名前" {...register('name')} />
-                    <Form label="メールアドレス" {...register('email')} />
-                    <Form label="パスワード" {...register('password')} />
-                    <Form name="password_confirmation" label="確認用パスワード" />
+                    <TextField
+                        id="name"
+                        required
+                        variant="outlined"
+                        label="お名前"
+                        margin="normal"
+                        error={"name" in errors} 
+                        {...register('name')} 
+                        helperText={errors.name?.message} 
+                    />
+                    <TextField
+                        id="email"
+                        required
+                        variant="outlined"
+                        label="メールアドレス"
+                        margin="normal"
+                        error={"email" in errors} 
+                        {...register('email')} 
+                        helperText={errors.email?.message} 
+                    />
+                    <TextField
+                        id="email"
+                        required
+                        variant="outlined"
+                        label="パスワード"
+                        margin="normal"
+                        error={"password" in errors} 
+                        {...register('password')} 
+                        helperText={errors.password?.message} 
+                    />
                     <Button
                         type="submit"
+                        onClick={handleSubmit(onSubmit)}
                         fullWidth
                         variant="contained"
                         color="primary"
