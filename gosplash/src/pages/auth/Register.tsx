@@ -1,5 +1,4 @@
 import React from "react";
-import { Form } from "../../components/Form";
 import { Box, Container, Button, Typography, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -65,6 +64,7 @@ export const Register: React.FC = () => {
                         required
                         variant="outlined"
                         label="お名前"
+                        fullWidth
                         margin="normal"
                         error={"name" in errors} 
                         {...register('name')} 
@@ -75,6 +75,7 @@ export const Register: React.FC = () => {
                         required
                         variant="outlined"
                         label="メールアドレス"
+                        fullWidth
                         margin="normal"
                         error={"email" in errors} 
                         {...register('email')} 
@@ -85,6 +86,7 @@ export const Register: React.FC = () => {
                         required
                         variant="outlined"
                         label="パスワード"
+                        fullWidth
                         margin="normal"
                         error={"password" in errors} 
                         {...register('password')} 
