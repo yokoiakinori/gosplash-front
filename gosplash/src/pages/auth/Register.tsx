@@ -12,6 +12,7 @@ import {
     IconButton,
     FormHelperText
 } from '@mui/material';
+import {BaseAxios} from "../../common-axios"
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -66,8 +67,9 @@ export const Register: React.FC = () => {
         resolver: yupResolver(schema),
     })
 
-    const onSubmit: SubmitHandler<FormInput> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<FormInput> = async (data) => {
+        const res = await BaseAxios.post('users/register', data)
+        console.log(res)
     }
     
     return (
