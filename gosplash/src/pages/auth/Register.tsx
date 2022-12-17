@@ -10,10 +10,11 @@ import {
     OutlinedInput,
     InputAdornment,
     IconButton,
-    FormHelperText
+    FormHelperText,
 } from '@mui/material';
 import {BaseAxios} from "../../common-axios"
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate, Link } from "react-router-dom"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup";
@@ -47,6 +48,8 @@ const schema = yup.object({
 })
 
 export const Register: React.FC = () => {
+    const navigate = useNavigate()
+
     const [showPassword, setShowPassword] = React.useState(false);
     const [showPasswordConfirmation, setShowPasswordConfirmation] = React.useState(false);
 
@@ -69,7 +72,7 @@ export const Register: React.FC = () => {
 
     const onSubmit: SubmitHandler<FormInput> = async (data) => {
         const res = await BaseAxios.post('users/register', data)
-        console.log(res)
+        navigate('/signin')
     }
     
     return (
@@ -87,7 +90,9 @@ export const Register: React.FC = () => {
                     アカウント作成
                 </Typography>
                 <Typography component="p" variant="body1">
-                    アカウントを既に持っている方はログインから
+                    {'アカウントを既に持っている方は'}
+                    <Link to="/signin">ログイン</Link>
+                    {'から'}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                     <TextField
