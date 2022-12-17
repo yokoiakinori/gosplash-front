@@ -115,9 +115,8 @@ export const Register: React.FC = () => {
                         fullWidth
                         error={"password" in errors}
                         margin="normal"
-                        {...register('password')}
                     >
-                        <InputLabel>パスワード</InputLabel>
+                        <InputLabel htmlFor="password">パスワード</InputLabel>
                         <OutlinedInput
                             id="password"
                             type={showPassword ? 'text' : 'password'}
@@ -134,6 +133,7 @@ export const Register: React.FC = () => {
                             </InputAdornment>
                             }
                             label="パスワード"
+                            {...register('password')}
                         />
                         <FormHelperText>{errors.password?.message}</FormHelperText>
                     </FormControl>
@@ -142,9 +142,8 @@ export const Register: React.FC = () => {
                         fullWidth
                         error={"password_confirmation" in errors}
                         margin="normal"
-                        {...register('password_confirmation')}
                     >
-                        <InputLabel>確認パスワード</InputLabel>
+                        <InputLabel htmlFor="password_confirmation">確認パスワード</InputLabel>
                         <OutlinedInput
                             id="password_confirmation"
                             type={showPasswordConfirmation ? 'text' : 'password'}
@@ -161,6 +160,7 @@ export const Register: React.FC = () => {
                                 </InputAdornment>
                             }
                             label="確認パスワード"
+                            {...register('password_confirmation')}
                         />
                         <FormHelperText>{errors.password_confirmation?.message}</FormHelperText>
                     </FormControl>
