@@ -9,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {BaseAxios} from "../../common-axios";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
@@ -68,8 +67,8 @@ export const SignIn: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    const res = await BaseAxios.post('users/register', data)
-    navigate('/signin')
+    const res = await BaseAxios.post('users/login', data)
+    navigate('/')
   }
 
   return (
@@ -94,8 +93,8 @@ export const SignIn: React.FC = () => {
               fullWidth
               id="email"
               label="メールアドレス"
-              name="email"
               autoComplete="email"
+              {...register('email')}
               autoFocus
             />
             <FormControl
