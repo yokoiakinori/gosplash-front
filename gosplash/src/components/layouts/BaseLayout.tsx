@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header";
+import { Footer } from "../Footer";
 import cssBaseLayout from "../../css/common/BaseLayout.module.css"
 
 export const BaseLayout: React.FC = () => {
@@ -10,6 +11,7 @@ export const BaseLayout: React.FC = () => {
             <div className={cssBaseLayout.container}>
                 <Outlet />
             </div>
+            <Footer />
         </div>
     )
 }
