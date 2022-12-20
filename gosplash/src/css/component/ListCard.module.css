@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper > img {
+    height: 400px;
+    background-color: #EEE;
+}
