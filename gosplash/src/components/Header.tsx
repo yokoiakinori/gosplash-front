@@ -30,8 +30,10 @@ export const Header: React.FC = () => {
     }
     return (
         <div className={cssHeader.wrapper}>
-            <p>ロゴ</p>
-            {link}
+            <div className={cssHeader.container}>
+                <p>ロゴ</p>
+                {link}
+            </div>
         </div>
     )
 }
