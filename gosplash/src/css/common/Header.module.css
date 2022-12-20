@@ -1,0 +1,33 @@
+.wrapper {
+    background-color: white;
+    box-shadow: 0 0 8px rgba(50, 50, 50, 0.25);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.container {
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.link_wrapper {
+    display: flex;
+    align-items: center;
+}
+.link_wrapper > p {
+    margin: 0 5px;
+}
+.link {
+    display: block;
+    text-decoration: none;
+    color: #757575;
+    vertical-align: middle;
+    transition-duration: 0.3s;
+}
+.link:hover {
+    color: #222;
+    transition-duration: 0.3s;
+}
