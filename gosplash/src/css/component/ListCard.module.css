@@ -2,9 +2,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .wrapper > img {
     height: 400px;
     background-color: #EEE;
+}
+
+.reactions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.show {
+    opacity: 1;
+    transition-duration: 0.2s;
+}
+
+.hidden {
+    opacity: 0;
+    transition-duration: 0.2s;
 }
