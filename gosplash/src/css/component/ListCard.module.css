@@ -3,11 +3,25 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    transition-duration: 0.2s;
+}
+
+.wrapper:hover {
+    background-color: #757575;
+    mix-blend-mode: multiply;
+    transition-duration: 0.2s;
 }
 
 .wrapper > img {
     height: 400px;
     background-color: #EEE;
+}
+
+.photographer {
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 .reactions {
